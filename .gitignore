@@ -1,0 +1,15 @@
+# dependencies (this project has none, but just in case)
+node_modules/
+
+# os / editor cruft
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# vercel
+.vercel
+
+# logs
+*.log
+npm-debug.log*
