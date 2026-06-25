@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Project · NeuroForge — backprop, written by hand</title>
+  <meta name="description" content="Why NeuroForge exists, how it was built, the parts that broke, and the technical decisions behind a from-scratch neural-network playground in vanilla JavaScript." />
+  <meta name="author" content="Chanda Charan Reddy" />
+  <meta name="theme-color" content="#05080f" />
+  <link rel="canonical" href="https://neuroforge-charan.vercel.app/about-project" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="NeuroForge" />
+  <meta property="og:title" content="The Project · NeuroForge" />
+  <meta property="og:description" content="The why, the build timeline, the part that broke everything, and the technical decisions behind a from-scratch neural-network playground." />
+  <meta property="og:url" content="https://neuroforge-charan.vercel.app/about-project" />
+  <meta property="og:image" content="https://neuroforge-charan.vercel.app/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Project · NeuroForge" />
+  <meta name="twitter:description" content="How a from-scratch neural-network playground got built — including the part that broke everything." />
+  <meta name="twitter:image" content="https://neuroforge-charan.vercel.app/og.png" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="pages.css" />
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="NeuroForge — back to the app">
+      <svg class="brand-mark" viewBox="0 0 40 40" width="32" height="32" aria-hidden="true">
+        <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#f97316"/></linearGradient></defs>
+        <circle cx="8" cy="11" r="3.4" fill="#38bdf8"/><circle cx="8" cy="29" r="3.4" fill="#38bdf8"/>
+        <circle cx="20" cy="20" r="3.8" fill="url(#g1)"/>
+        <circle cx="32" cy="14" r="3.4" fill="#e2e8f0"/><circle cx="32" cy="27" r="3.4" fill="#e2e8f0"/>
+        <g stroke="url(#g1)" stroke-width="1.6" opacity="0.85">
+          <line x1="8" y1="11" x2="20" y2="20"/><line x1="8" y1="29" x2="20" y2="20"/>
+          <line x1="20" y1="20" x2="32" y2="14"/><line x1="20" y1="20" x2="32" y2="27"/>
+        </g>
+      </svg>
+      <span class="brand-text">
+        <span class="brand-name">Neuro<span>Forge</span></span>
+        <span class="brand-tag">backprop, written by hand</span>
+      </span>
+    </a>
+    <nav class="hnav" aria-label="Site">
+      <a class="navlink active" href="about-project.html" aria-current="page">The&nbsp;project</a>
+      <a class="navlink" href="about.html">About</a>
+      <a class="navlink launch" href="index.html">Launch&nbsp;app →</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <div class="page-hero">
+      <span class="eyebrow">About the project</span>
+      <h1>A neural network you can <span class="hl">watch think</span>.</h1>
+      <p class="lede">NeuroForge trains a real network — forward pass, backprop, optimizers, all hand-written in vanilla JavaScript — and paints every step of it on screen. No TensorFlow. No build step. The math is the product.</p>
+      <div class="btn-row" style="margin-top:26px">
+        <a class="btn primary" href="index.html">▶ Launch the app</a>
+        <a class="btn" href="https://github.com/charanreddy-27/neuroforge" target="_blank" rel="noopener">View source</a>
+      </div>
+    </div>
+
+    <section class="block">
+      <p class="kicker">The why</p>
+      <h2 class="title">It started as an itch about honesty</h2>
+      <div class="prose">
+        <p>Almost every "neural network demo" online is a magic trick. There's a slick UI on top, and somewhere underneath a giant library is quietly doing all the actual learning. You move a slider, something animates, and you walk away having understood <em>nothing</em> about how the thing learns. It looks like magic in a notebook and falls apart the moment you have to explain it.</p>
+        <p>I'd hit this wall trying to explain backpropagation to people — reaching for the same tired diagram of arrows pointing backward, watching eyes glaze over. So I flipped the trick inside out. What if the library <strong>was</strong> the demo? What if you could open the source and find the gradients sitting right there, in 250 lines of commented JavaScript, demonstrably training a spiral classifier?</p>
+        <p>That's NeuroForge. The visualizer is wrapped around a real engine, not a toy. If you want to understand backprop, reading code that obviously works beats another diagram.</p>
+      </div>
+    </section>
+
+    <section class="block">
+      <p class="kicker">How it came together</p>
+      <h2 class="title">A build timeline (including the part that broke everything)</h2>
+      <ol class="timeline">
+        <li>
+          <span class="when">January 2026 · Ideation</span>
+          <h3>"What if the library was the demo?"</h3>
+          <p>Sketched the premise on a napkin: a playground where the learning algorithm is hand-written and readable, not hidden. One hard rule from day one — zero dependencies, no build step.</p>
+        </li>
+        <li>
+          <span class="when">February 2026 · Design &amp; scoping</span>
+          <h3>The "instrument" look, and a deliberately small scope</h3>
+          <p>Settled the aesthetic: deep slate, one molten-amber accent, monospaced telemetry, cool/warm hues mapped to the two classes everywhere. Scoped it to 2-D binary classification — small enough to train live in a browser, rich enough to teach depth, features, and overfitting.</p>
+        </li>
+        <li>
+          <span class="when">March 2026 · The engine</span>
+          <h3>Forward pass, backprop, three optimizers — by hand</h3>
+          <p>Wrote the core: fully-connected layers, manual backpropagation, and SGD / Momentum / Adam built from the update rules up. Seeded RNG with He/Xavier init so any run reproduces.</p>
+        </li>
+        <li>
+          <span class="when">April 2026 · Where it got hard</span>
+          <h3 style="color:var(--warm)">The boundary that refused to bend</h3>
+          <p>First integration: I hit Train and the decision boundary just… sat there. No crash, no error — the worst kind of bug, the quietly-wrong kind. Two days of staring before a numerical gradient check pinned it to a batch-averaging slip. Once fixed, analytic and numerical gradients agreed to ~2e-10, and the spiral finally unwound.</p>
+        </li>
+        <li>
+          <span class="when">May 2026 · The visual layer</span>
+          <h3>Making the learning legible at 60fps</h3>
+          <p>Built the three views on raw canvas: the decision-boundary heatmap, the live weight graph, and hand-drawn loss/accuracy charts. Getting 6,400 forward passes per frame to stay smooth meant caching the field and recomputing only on change.</p>
+        </li>
+        <li>
+          <span class="when">June 2026 · Polish &amp; launch</span>
+          <h3>Presets, accessibility, and ship</h3>
+          <p>Added one-click presets ("Solve the spiral"), keyboard shortcuts, model export, an accessibility pass, and the About pages you're reading. Deployed to Vercel as a static site — nothing to configure.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="block">
+      <p class="kicker">What it does</p>
+      <h2 class="title">Key features</h2>
+      <div class="grid2">
+        <div class="feat"><h3><span class="ic">◆</span> Five datasets</h3><p>Spiral, circle, XOR, two gaussians, and interleaving moons — with adjustable noise, sample count, and train/test split.</p></div>
+        <div class="feat"><h3><span class="ic">◆</span> Build the net live</h3><p>Add or remove hidden layers, change neuron counts, switch activation (tanh / ReLU / sigmoid). The parameter count updates as you go.</p></div>
+        <div class="feat"><h3><span class="ic">◆</span> Feature engineering</h3><p>Toggle X₁², X₂², X₁X₂, sin X₁, sin X₂. Solve the circle with <em>no hidden layers</em> — a logistic-regression lesson in one click.</p></div>
+        <div class="feat"><h3><span class="ic">◆</span> Live decision boundary</h3><p>A diverging heatmap of the network's output across the whole plane, recomputed as it learns. This is the centrepiece.</p></div>
+        <div class="feat"><h3><span class="ic">◆</span> Live weight graph</h3><p>Every connection coloured by sign (amber +, cyan −) and weighted by magnitude — you literally watch the network reorganise itself.</p></div>
+        <div class="feat"><h3><span class="ic">◆</span> Full optimizer control</h3><p>Optimizer, learning rate, batch size, and L2 regularization — all applied live. Plus presets, model export, and keyboard shortcuts.</p></div>
+      </div>
+    </section>
+
+    <section class="block">
+      <p class="kicker">The interesting bits</p>
+      <h2 class="title">Technical decisions &amp; challenges</h2>
+      <div class="card">
+        <div class="challenge">
+          <h3>The boundary that wouldn't bend</h3>
+          <p class="tag">// problem: silently-wrong gradients</p>
+          <p>The network ran without errors but never learned. With no exception to chase, the only honest move is to <strong>verify the gradients directly</strong>: nudge each weight by a tiny ε, measure how the loss actually changes (central differences), and compare to what backprop claims. The mismatch isolated a mini-batch averaging bug to a single line. The gradient check is still in the engine — analytic vs. numerical agree to ~2e-10.</p>
+        </div>
+        <div class="challenge">
+          <h3>6,400 forward passes, every single frame</h3>
+          <p class="tag">// problem: real-time rendering in plain JS</p>
+          <p>The heatmap is an 80×80 grid — 6,400 forward passes — and naively recomputing it each frame tanks the framerate. The fix is two-part: render the field at low resolution into an off-screen canvas, then let the GPU smoothly upscale it; and <strong>only recompute when the weights change</strong> (a dirty flag), drawing the cached field otherwise. Result: a steady 60fps while training.</p>
+        </div>
+        <div class="challenge">
+          <h3>What you see is exactly what the net sees</h3>
+          <p class="tag">// problem: keeping the picture truthful</p>
+          <p>The boundary renderer feeds raw plane coordinates through the <em>same</em> <span class="muted">featurize()</span> function the training data uses. So when you toggle "X₁²" and the boundary turns into a circle, that's not a visual approximation — it's the literal transform the network is learning on. The picture can't lie, because it's drawn from the same pipeline.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <p class="kicker">Under the hood</p>
+      <h2 class="title">Tech stack — and why</h2>
+      <div class="stack">
+        <div class="stack-row"><span class="what">Vanilla JS (ES2015+)</span><span class="why">No framework — the whole point is to read the algorithm, not a build config.</span></div>
+        <div class="stack-row"><span class="what">HTML5 Canvas</span><span class="why">Pixel-level control for thousands of draws a frame; SVG or DOM nodes would choke.</span></div>
+        <div class="stack-row"><span class="what">CSS custom properties</span><span class="why">One hand-written design system, themeable from a dozen tokens — no UI kit.</span></div>
+        <div class="stack-row"><span class="what">mulberry32 RNG</span><span class="why">A tiny seeded generator so every run is reproducible — a bug today is the same bug tomorrow.</span></div>
+        <div class="stack-row"><span class="what">Zero dependencies</span><span class="why">Open <span class="muted">index.html</span> and it runs. Nothing to install, nothing to audit, nothing to break.</span></div>
+        <div class="stack-row"><span class="what">Vercel (static)</span><span class="why">Push to deploy, global edge, clean URLs — there's nothing to configure for a static site.</span></div>
+      </div>
+    </section>
+
+    <section class="block">
+      <p class="kicker">Links</p>
+      <h2 class="title">Dig deeper</h2>
+      <div class="card">
+        <div class="btn-row">
+          <a class="btn" href="https://github.com/charanreddy-27/neuroforge" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            GitHub repo
+          </a>
+          <a class="btn" href="https://www.linkedin.com/in/chandacharanreddy/" target="_blank" rel="noopener">LinkedIn write-up (coming soon)</a>
+          <a class="btn primary" href="index.html">▶ Try it live</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="contact-card">
+        <h2>Want to build something — or collaborate?</h2>
+        <p class="sub">Whether it's a production LLM system or another from-scratch curiosity, I'm always up for an interesting problem.</p>
+        <div class="contact-actions">
+          <a class="btn primary" href="about.html#contact">→ Contact me</a>
+          <a class="btn" href="https://cal.com/charanreddy-27/30min" target="_blank" rel="noopener">📅 Book a call</a>
+          <a class="btn" href="https://www.charanreddy.dev" target="_blank" rel="noopener">See the portfolio</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <span class="crafted">Crafted with intent by <b>Chanda Charan Reddy</b>.</span>
+      <span class="avail">Available for new projects</span>
+      <span class="foot-links">
+        <a href="index.html">App</a>
+        <a href="about.html">About</a>
+        <a href="https://www.charanreddy.dev" target="_blank" rel="noopener">Portfolio</a>
+      </span>
+    </div>
+  </footer>
+</body>
+</html>

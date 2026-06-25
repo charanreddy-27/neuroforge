@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About · Chanda Charan Reddy — NeuroForge</title>
+  <meta name="description" content="The human behind NeuroForge. AI & automation engineer Charan Reddy on what he builds, what this project taught him, and how to get in touch." />
+  <meta name="author" content="Chanda Charan Reddy" />
+  <meta name="theme-color" content="#05080f" />
+  <link rel="canonical" href="https://neuroforge-charan.vercel.app/about" />
+
+  <meta property="og:type" content="profile" />
+  <meta property="og:site_name" content="NeuroForge" />
+  <meta property="og:title" content="About · Chanda Charan Reddy" />
+  <meta property="og:description" content="AI & automation engineer. Ships production LLM systems, a Springer-published model that reads chest X-rays — and once wrote control code for jet engines." />
+  <meta property="og:url" content="https://neuroforge-charan.vercel.app/about" />
+  <meta property="og:image" content="https://neuroforge-charan.vercel.app/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="About · Chanda Charan Reddy" />
+  <meta name="twitter:description" content="AI & automation engineer. The human behind NeuroForge." />
+  <meta name="twitter:image" content="https://neuroforge-charan.vercel.app/og.png" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="pages.css" />
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="NeuroForge — back to the app">
+      <svg class="brand-mark" viewBox="0 0 40 40" width="32" height="32" aria-hidden="true">
+        <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#f97316"/></linearGradient></defs>
+        <circle cx="8" cy="11" r="3.4" fill="#38bdf8"/><circle cx="8" cy="29" r="3.4" fill="#38bdf8"/>
+        <circle cx="20" cy="20" r="3.8" fill="url(#g1)"/>
+        <circle cx="32" cy="14" r="3.4" fill="#e2e8f0"/><circle cx="32" cy="27" r="3.4" fill="#e2e8f0"/>
+        <g stroke="url(#g1)" stroke-width="1.6" opacity="0.85">
+          <line x1="8" y1="11" x2="20" y2="20"/><line x1="8" y1="29" x2="20" y2="20"/>
+          <line x1="20" y1="20" x2="32" y2="14"/><line x1="20" y1="20" x2="32" y2="27"/>
+        </g>
+      </svg>
+      <span class="brand-text">
+        <span class="brand-name">Neuro<span>Forge</span></span>
+        <span class="brand-tag">backprop, written by hand</span>
+      </span>
+    </a>
+    <nav class="hnav" aria-label="Site">
+      <a class="navlink" href="about-project.html">The&nbsp;project</a>
+      <a class="navlink active" href="about.html" aria-current="page">About</a>
+      <a class="navlink launch" href="index.html">Launch&nbsp;app →</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <div class="page-hero">
+      <span class="eyebrow">About the human</span>
+      <h1>I build <span class="hl">intelligent systems</span>.</h1>
+      <p class="lede">Most of them are useful. This one is just honest about how it works.</p>
+    </div>
+
+    <section class="block prose">
+      <p>I'm <strong>Charan</strong> — an AI &amp; automation engineer in Bangalore. I ship production LLM systems: document pipelines that run themselves, a <strong>Springer-published model that reads chest X-rays</strong> well enough for a radiologist to take seriously, and the unglamorous plumbing that keeps both alive after the demo is over.</p>
+      <p>Before any of that, I wrote real-time control code for <strong>jet engines at DRDO</strong> — where a millisecond of lag isn't a bug, it's a flameout. That job rewired how I think about software: it should be correct first, fast second, and never quietly wrong. NeuroForge carries that same bias. Most "neural network demos" are a thin UI over a library doing all the real work. This one is the opposite — <em>the learning algorithm is the project</em>. No TensorFlow, no autograd. The math is right there in 250 lines you can read in one sitting.</p>
+    </section>
+
+    <section class="block">
+      <p class="kicker">What I learned building this</p>
+      <h2 class="title">Five honest takeaways</h2>
+      <div class="learned">
+        <div class="learned-item">
+          <span class="n">01</span>
+          <div>
+            <h3>Backprop is gentler on paper than on a whiteboard</h3>
+            <p>Once you commit to "a layer is just <span class="muted">a = act(W·a + b)</span>," the backward pass is the same loop run in reverse. Writing it without autograd forced me to actually understand the chain rule instead of nodding along to it.</p>
+          </div>
+        </div>
+        <div class="learned-item">
+          <span class="n">02</span>
+          <div>
+            <h3>Trust nothing — gradient-check everything</h3>
+            <p>My first decision boundary refused to bend. The bug wasn't in the clever part; it was an averaging-over-the-batch slip. A numerical gradient check (central differences vs. the analytic gradients) caught it, and now the two agree to a relative error of ~2e-10 — basically machine precision.</p>
+          </div>
+        </div>
+        <div class="learned-item">
+          <span class="n">03</span>
+          <div>
+            <h3>Rendering is a feature, not decoration</h3>
+            <p>A network that trains in the console teaches no one. The boundary heatmap — a grid of forward passes recomputed and upscaled each frame — is the difference between "it works" and "oh, <em>that's</em> what overfitting looks like."</p>
+          </div>
+        </div>
+        <div class="learned-item">
+          <span class="n">04</span>
+          <div>
+            <h3>Performance is a UX decision</h3>
+            <p>6,400 forward passes per frame in plain JavaScript is not free. Caching the field and recomputing it only when the weights actually change is what keeps the whole thing at 60fps. Old habit from the jet-engine days: budget the milliseconds before you spend them.</p>
+          </div>
+        </div>
+        <div class="learned-item">
+          <span class="n">05</span>
+          <div>
+            <h3>Constraints make better work</h3>
+            <p>Banning every dependency sounds like a stunt. It was the best decision in the project: nowhere to hide, nothing to "just import," and a repo anyone can read top to bottom in an afternoon. The human lesson — the limits I picked taught me more than the freedom would have.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="tease">
+        <p><span class="hl">This is one project.</span> There are 18 more — plus a published X-ray model and a couple of jet engines — over at <strong>charanreddy.dev</strong>. Consider this the door, not the billboard.</p>
+        <a class="btn primary" href="https://www.charanreddy.dev" target="_blank" rel="noopener">See the rest →</a>
+      </div>
+    </section>
+
+    <section class="block">
+      <p class="kicker">Find me</p>
+      <h2 class="title">Want to build something — or break something interesting? Let's talk.</h2>
+      <div class="card">
+        <div class="btn-row">
+          <a class="btn" href="https://github.com/charanreddy-27" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="https://www.linkedin.com/in/chandacharanreddy/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://cal.com/charanreddy-27/30min" target="_blank" rel="noopener">Book a call</a>
+          <a class="btn" href="https://www.charanreddy.dev" target="_blank" rel="noopener">Portfolio</a>
+          <a class="btn" href="https://orcid.org/0009-0003-2414-6717" target="_blank" rel="noopener">ORCID</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="contact">
+      <div class="contact-card">
+        <h2>Have an idea? Let's talk.</h2>
+        <p class="sub">Hiring, collaborating, or just want to argue about whether you really need a framework — the inbox is open.</p>
+        <div class="contact-actions">
+          <a class="btn primary" href="https://cal.com/charanreddy-27/30min" target="_blank" rel="noopener">📅 Book a call</a>
+          <a class="btn" href="mailto:charanreddychanda@gmail.com">✉ Email</a>
+          <a class="btn" href="https://github.com/charanreddy-27" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="https://www.linkedin.com/in/chandacharanreddy/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://www.charanreddy.dev" target="_blank" rel="noopener">Résumé</a>
+        </div>
+
+        <form class="form" id="contactForm" novalidate>
+          <div class="pair">
+            <div class="field-l">
+              <label for="cf-name">Name</label>
+              <input id="cf-name" name="name" type="text" autocomplete="name" placeholder="Your name" required />
+            </div>
+            <div class="field-l">
+              <label for="cf-email">Email</label>
+              <input id="cf-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required />
+            </div>
+          </div>
+          <div class="field-l">
+            <label for="cf-msg">Message</label>
+            <textarea id="cf-msg" name="message" placeholder="What are we building?" required></textarea>
+          </div>
+          <div class="form-foot">
+            <button class="btn primary" type="submit">Send message →</button>
+            <span class="form-note">Opens your mail app, pre-filled — no data leaves your machine.</span>
+          </div>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <span class="crafted">Crafted with intent by <b>Chanda Charan Reddy</b>.</span>
+      <span class="avail">Available for new projects</span>
+      <span class="foot-links">
+        <a href="index.html">App</a>
+        <a href="about-project.html">The project</a>
+        <a href="https://www.charanreddy.dev" target="_blank" rel="noopener">Portfolio</a>
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    // Honest, backend-free contact: compose a pre-filled email. Nothing is sent anywhere.
+    (function () {
+      var form = document.getElementById("contactForm");
+      var status = document.getElementById("formStatus");
+      if (!form) return;
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var name = form.name.value.trim();
+        var email = form.email.value.trim();
+        var msg = form.message.value.trim();
+        if (!name || !email || !msg) {
+          status.style.color = "var(--warm)";
+          status.textContent = "A name, an email and a line about the idea — then we're good.";
+          return;
+        }
+        var subject = encodeURIComponent("NeuroForge — message from " + name);
+        var body = encodeURIComponent(msg + "\n\n— " + name + " (" + email + ")");
+        window.location.href = "mailto:charanreddychanda@gmail.com?subject=" + subject + "&body=" + body;
+        status.style.color = "var(--good)";
+        status.textContent = "Opening your mail app… if nothing happens, write to charanreddychanda@gmail.com.";
+      });
+    })();
+  </script>
+</body>
+</html>

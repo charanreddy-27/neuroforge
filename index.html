@@ -4,8 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NeuroForge · watch a neural network learn</title>
-  <meta name="description" content="An interactive neural-network playground with a backpropagation engine written from scratch in vanilla JavaScript — no ML libraries." />
+  <meta name="description" content="An interactive neural-network playground with a backpropagation engine written from scratch in vanilla JavaScript — no TensorFlow, no autograd, no dependencies." />
+  <meta name="author" content="Chanda Charan Reddy" />
+  <meta name="keywords" content="neural network, backpropagation, machine learning, visualization, vanilla javascript, deep learning, playground" />
+  <meta name="theme-color" content="#05080f" />
+  <link rel="canonical" href="https://neuroforge-charan.vercel.app/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="NeuroForge" />
+  <meta property="og:title" content="NeuroForge · watch a neural network learn" />
+  <meta property="og:description" content="Build a net, drop it on a dataset, hit Train, and watch backprop bend the decision boundary in real time. The whole learning engine is hand-written in vanilla JS." />
+  <meta property="og:url" content="https://neuroforge-charan.vercel.app/" />
+  <meta property="og:image" content="https://neuroforge-charan.vercel.app/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="NeuroForge — an interactive, from-scratch neural network playground" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="NeuroForge · watch a neural network learn" />
+  <meta name="twitter:description" content="Build a net, drop it on a dataset, hit Train, and watch backprop bend the decision boundary in real time. Hand-written in vanilla JS." />
+  <meta name="twitter:image" content="https://neuroforge-charan.vercel.app/og.png" />
+
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -44,8 +67,12 @@
       <div class="stat"><span class="stat-k">train loss</span><span class="stat-v" id="hLoss">—</span></div>
       <div class="stat"><span class="stat-k">test acc</span><span class="stat-v accent" id="hAcc">—</span></div>
       <span class="badge" title="No TensorFlow, no autograd — the forward pass, gradients and optimizers are all hand-written.">0 ML deps</span>
-      <a class="ghbtn" id="ghLink" href="#" target="_blank" rel="noopener" title="Source">
-        <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      <nav class="hnav" aria-label="Site">
+        <a class="navlink" href="about-project.html">The&nbsp;project</a>
+        <a class="navlink" href="about.html">About</a>
+      </nav>
+      <a class="ghbtn" id="ghLink" href="https://github.com/charanreddy-27/neuroforge" target="_blank" rel="noopener" title="Source on GitHub" aria-label="Source on GitHub">
+        <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
       </a>
     </div>
   </header>
@@ -152,7 +179,7 @@
       </div>
 
       <div class="board">
-        <canvas id="boundary"></canvas>
+        <canvas id="boundary" role="img" aria-label="Decision boundary heatmap. A diverging cyan-to-amber field shows the network's prediction across the input plane, with training and test data points scattered on top."></canvas>
         <div class="legend">
           <span><i class="dot c0"></i>class 0</span>
           <span><i class="dot c1"></i>class 1</span>
@@ -166,7 +193,7 @@
     <aside class="inspector">
       <section class="panel grow">
         <h2 class="panel-title"><span class="idx">◆</span> Network</h2>
-        <div class="netwrap"><canvas id="network"></canvas></div>
+        <div class="netwrap"><canvas id="network" role="img" aria-label="Live network diagram. Each connection is coloured by the sign of its weight and thickened by magnitude, so the network is seen reorganising itself as it trains."></canvas></div>
         <div class="legend small">
           <span><i class="dash warm"></i>positive weight</span>
           <span><i class="dash cool"></i>negative weight</span>
@@ -185,18 +212,19 @@
 
       <section class="panel">
         <div class="chart-head"><h3>Loss</h3><div class="legend small"><span><i class="line solid"></i>train</span><span><i class="line dash"></i>test</span></div></div>
-        <div class="chartwrap"><canvas id="lossChart"></canvas></div>
+        <div class="chartwrap"><canvas id="lossChart" role="img" aria-label="Live loss chart: training loss (solid) versus test loss (dashed) over epochs."></canvas></div>
       </section>
 
       <section class="panel">
         <div class="chart-head"><h3>Accuracy</h3><div class="legend small"><span><i class="line solid"></i>train</span><span><i class="line dash"></i>test</span></div></div>
-        <div class="chartwrap"><canvas id="accChart"></canvas></div>
+        <div class="chartwrap"><canvas id="accChart" role="img" aria-label="Live accuracy chart: training accuracy (solid) versus test accuracy (dashed) over epochs."></canvas></div>
       </section>
     </aside>
   </main>
 
   <footer class="app-footer">
     <span>Forward pass · backpropagation · SGD / Momentum / Adam — all hand-written in vanilla JS.</span>
+    <span class="footer-by">Built by <a href="about.html">Charan</a> · <a href="https://www.charanreddy.dev" target="_blank" rel="noopener">charanreddy.dev</a></span>
     <span class="kbd-hints"><kbd>space</kbd> train · <kbd>S</kbd> step · <kbd>R</kbd> reset</span>
   </footer>
 
